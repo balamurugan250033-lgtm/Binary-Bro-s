@@ -18,10 +18,17 @@ app.use(express.json());
 // DB Connection
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('Successfully connected to MongoDB Atlas'))
-    .catch(err => console.error('MongoDB connection error:', err));
+    .then(() => console.log('✅ Successfully connected to MongoDB Atlas'))
+    .catch(err => {
+      console.error('❌ MongoDB connection error:', err.message);
+      console.error('👉 Please check your IP Whitelist in Atlas and your credentials in .env');
+    });
+
+  mongoose.connection.on('error', err => {
+    console.error('🔴 Mongoose connection error:', err);
+  });
 } else {
-  console.log('Using local JSON database (data.json) - Connect MONGODB_URI for production');
+  console.log('⚠️ Using local JSON database (data.json) - Connect MONGODB_URI for production');
 }
 
 // Routes

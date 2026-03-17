@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../db');
 const User = require('../models/User');
+const mongoose = require('mongoose');
 
 const router = express.Router();
 
@@ -57,7 +58,17 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required' });
+    }
+    
     if (process.env.MONGODB_URI) {
+      // Check if DB is actually connected
+      if (mongoose.connection.readyState !== 1) {
+        console.error('❌ Database not connected. readyState:', mongoose.connection.readyState);
+        return res.status(503).json({ error: 'Database connection is still initializing. Please try again in a few seconds.' });
+      }
+
       const user = await User.findOne({ email });
       if (!user || !await bcrypt.compare(password, user.password)) {
         return res.status(401).json({ error: 'Invalid credentials' });

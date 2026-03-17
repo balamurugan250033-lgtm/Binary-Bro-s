@@ -9,8 +9,8 @@ const router = express.Router();
 // Get all events
 router.get('/', async (req, res) => {
   try {
-    if (process.env.MONGODB_URI) {
-      const events = await Event.find().populate('registeredUsers', 'name email');
+    if (Event) {
+      const events = await Event.findAll();
       return res.json(events);
     }
 

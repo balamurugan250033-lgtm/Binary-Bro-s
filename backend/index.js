@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const mongoose = require('mongoose');
+const sequelize = require('./config/database');
 
 dotenv.config();
 
@@ -16,12 +16,17 @@ app.use(cors({
 app.use(express.json());
 
 // DB Connection
-if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('Successfully connected to MongoDB Atlas'))
-    .catch(err => console.error('MongoDB connection error:', err));
+if (sequelize) {
+  sequelize.authenticate()
+    .then(() => {
+      console.log('Successfully connected to MySQL Database');
+      // Sync models
+      return sequelize.sync({ alter: true });
+    })
+    .then(() => console.log('Sequelize models synchronized'))
+    .catch(err => console.error('MySQL connection error:', err));
 } else {
-  console.log('Using local JSON database (data.json) - Connect MONGODB_URI for production');
+  console.log('Using local JSON database (data.json) - Connect MySQL for production');
 }
 
 // Routes
@@ -31,7 +36,7 @@ app.use('/api/leaderboard', require('./routes/leaderboard'));
 
 // Root route
 app.get('/', (req, res) => {
-  res.send('Backend is running! Access the frontend at http://localhost:5173');
+  res.send('Backend is running with MySQL! Access the frontend at http://localhost:5173');
 });
 
 app.listen(PORT, () => {

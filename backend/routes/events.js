@@ -1,5 +1,7 @@
 const express = require('express');
 const db = require('../db');
+const Event = require('../models/Event');
+const User = require('../models/User');
 const { auth } = require('./auth');
 
 const router = express.Router();
@@ -7,6 +9,11 @@ const router = express.Router();
 // Get all events
 router.get('/', async (req, res) => {
   try {
+    if (process.env.MONGODB_URI) {
+      const events = await Event.find().populate('registeredUsers', 'name email');
+      return res.json(events);
+    }
+
     const data = db.data;
     // populate registeredUsers
     const events = data.events.map(event => {

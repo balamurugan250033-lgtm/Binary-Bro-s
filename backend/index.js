@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 
 dotenv.config();
 
@@ -14,8 +15,14 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Local DB connection
-console.log('Using local JSON database (data.json) to bypass network restrictions');
+// DB Connection
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log('Successfully connected to MongoDB Atlas'))
+    .catch(err => console.error('MongoDB connection error:', err));
+} else {
+  console.log('Using local JSON database (data.json) - Connect MONGODB_URI for production');
+}
 
 // Routes
 app.use('/api/auth', require('./routes/auth').router);

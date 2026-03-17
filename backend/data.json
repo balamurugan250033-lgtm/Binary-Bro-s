@@ -1,0 +1,68 @@
+{
+  "users": [
+    {
+      "_id": "j1x8eu3rx58",
+      "name": "bharath",
+      "email": "vbalamurugan252@gmail.com",
+      "password": "$2b$10$XbEtlQRzoPnnS8tiIlTh1OdZLg57YwoLn351Ued4ccv.hpm2iaoNS",
+      "role": "student",
+      "points": 0,
+      "registeredEvents": [],
+      "createdAt": "2026-03-16T07:06:16.920Z"
+    },
+    {
+      "_id": "imae3098npp",
+      "name": "bharathdilli",
+      "email": "asrinjebus2026@gmail.com",
+      "password": "$2b$10$AcBLQsYO/B5cQgpZ6dCnhOBMOs1iSfOqCO7p9A/nF0Vg1HUU8oigi",
+      "role": "student",
+      "points": 0,
+      "registeredEvents": [],
+      "createdAt": "2026-03-16T07:07:32.771Z"
+    },
+    {
+      "_id": "7vjmifrjg7g",
+      "name": "abcd",
+      "email": "as2026@gmail.com",
+      "password": "$2b$10$g0cmfuvbPY3qvQivRARqwO4v0ubbv/P6XL02X8RRteTMo0Fhv7OEy",
+      "role": "student",
+      "points": 0,
+      "registeredEvents": [],
+      "createdAt": "2026-03-16T07:32:32.557Z"
+    },
+    {
+      "_id": "o3ur2nkx0kb",
+      "name": "Test User",
+      "email": "testuser@example.com",
+      "password": "$2b$10$0AY7SyUNbEETFxSswiMUJeTQCPbU8bL/kfoG0fq402i2tE33zoYmG",
+      "role": "student",
+      "points": 0,
+      "registeredEvents": [],
+      "createdAt": "2026-03-16T16:48:50.030Z"
+    }
+  ],
+  "events": [
+    {
+      "_id": "evt_1",
+      "title": "Intro to Algorithms",
+      "description": "Learn basic algorithms and data structures.",
+      "date": "2024-05-15T00:00:00.000Z",
+      "time": "10:00 AM",
+      "location": "Online",
+      "capacity": 100,
+      "registeredUsers": [],
+      "points": 10
+    },
+    {
+      "_id": "evt_2",
+      "title": "Web Development Bootcamp",
+      "description": "Full-stack development workshop.",
+      "date": "2024-05-20T00:00:00.000Z",
+      "time": "2:00 PM",
+      "location": "Main Hall",
+      "capacity": 50,
+      "registeredUsers": [],
+      "points": 20
+    }
+  ]
+}

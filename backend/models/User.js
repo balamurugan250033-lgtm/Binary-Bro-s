@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { type: String, default: 'student' }, // student, coordinator
+  role: { type: String, enum: ['student', 'coordinator'], default: 'student' },
   points: { type: Number, default: 0 },
   registeredEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
 }, { timestamps: true });

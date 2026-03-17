@@ -7,12 +7,10 @@ const router = express.Router();
 // Get leaderboard
 router.get('/', async (req, res) => {
   try {
-    if (User) {
-      const students = await User.findAll({
-        where: { role: 'student' },
-        order: [['points', 'DESC']],
-        attributes: ['id', 'name', 'email', 'points']
-      });
+    if (process.env.MONGODB_URI) {
+      const students = await User.find({ role: 'student' })
+        .sort({ points: -1 })
+        .select('name email points');
       return res.json(students);
     }
 
